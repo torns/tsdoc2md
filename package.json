@@ -1,5 +1,5 @@
 {
-  "name": "tsdoc2md",
+  "name": "tsdoc2md.torn",
   "version": "0.0.13",
   "description": "convert typescript comments to markdown file",
   "main": "./lib/main",

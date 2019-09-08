@@ -13,10 +13,7 @@ import { FunctionListWriter } from "./output/FunctionListWriter";
 
 console.log(process.cwd());
 try {
-  const tsdoc2mdConfigJsonPath: string = path.join(
-    process.cwd(),
-    "tsdoc2md.json"
-  );
+  const tsdoc2mdConfigJsonPath: string = path.join(process.cwd(), "tsdoc2md.json");
 
   const tsdoc2mdJsonString = FS.readFileSync(tsdoc2mdConfigJsonPath, "utf8");
   const tsdoc2mdJsonObject: InputModel = JSON.parse(tsdoc2mdJsonString);
@@ -30,9 +27,12 @@ try {
   const apiFilePath = getApiFilePath();
 
   // 生成 markdown 文件
-  const markdownName = apiFilePath
-    .replace(/[\s\S]+\\temp\\/, "")
-    .replace(".api.json", "");
+  let markdownName = apiFilePath.replace(/[\s\S]+\\temp\\/, "").replace(".api.json", "");
+  if (markdownName) {
+    let strs = markdownName.split("/");
+    if (strs && strs.length > 0) markdownName = strs[strs.length - 1];
+  }
+
   const markdownDir = path.join(process.cwd(), tsdoc2mdJsonObject.outDir);
   // outDir 不存在则创建
   if (!FS.existsSync(markdownDir)) {
@@ -41,7 +41,7 @@ try {
   const markdownFilePath = path.join(markdownDir, `${markdownName}.md`);
   // 移除旧文件
   if (FS.existsSync(markdownFilePath)) {
-    FS.unlinkSync(markdownFilePath)
+    FS.unlinkSync(markdownFilePath);
   }
 
   const tsdocJsonString = FS.readFileSync(apiFilePath, "utf8");
