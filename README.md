@@ -8,6 +8,9 @@ Only support annotations @param, @returns, @example.
 
 Please follow typescript doc comment syntax: [Doc comment syntax](https://api-extractor.com/pages/tsdoc/doc_comment_syntax/)
 
+## Demo
+[tsdoc2md-demo](https://github.com/yiidot/tsdoc2md-demo.git)
+
 ## Install
 ```
 npm install -g tsdoc2md
@@ -46,6 +49,3 @@ execute command
 # use in terminal
 tsdoc2md
 ```
-
-### keywords
-typescript, markdown

@@ -22,14 +22,18 @@ export class ClassWriter {
         str += "#### Example\n";
         str += `${this._document.constructorP.example.content}\n`;
       }
-
-      // property
+    }
+    // property
+    if (this._document.properties.length) {
       str += "## Properties\n";
       this._document.properties.forEach(item => {
         str += `### ${item.name}\n`;
         str += `#### ${item.title.content}\n`;
         str += `\`\`\`ts\n${item.code}\n\`\`\`\n`;
       });
+    }
+      // methods
+    if (this._document.methods.length) {
       str += "## Methods\n";
       this._document.methods.forEach(item => {
         str += `### ${item.name}\n`;
@@ -51,6 +55,8 @@ export class ClassWriter {
           str += `${item.example.content}\n`;
         }
       });
+    }
+    if (str) {
       FS.writeFileSync(filePath, str, { flag: "a" });
       // console.log(str);
     }
